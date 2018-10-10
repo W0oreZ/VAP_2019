@@ -8,6 +8,7 @@ class Home extends frontEnd_Controller {
         $this->load->view('Home/index');
     }
     /*test*/
+    /*fdfd*/
 
 }
 
