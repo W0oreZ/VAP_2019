@@ -118,7 +118,7 @@ class MY_Model extends CI_Model
 		if($this->_timestamps == TRUE){
 			$now = date('Y-m-d H:i:s');
 			$id || $data['created_at'] = $now;
-			$data['modified_at'] = $now;
+			$data['updated_at'] = $now;
 		}
 
 		//insert

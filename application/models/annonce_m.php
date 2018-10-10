@@ -12,4 +12,17 @@
 		parent::__construct();
 	}
 	
+	function get_new(){
+			$annonce = new stdClass();
+			$annonce->id = '';
+			$annonce->titre = '';
+			$annonce->description = '';
+			$annonce->ville_id = '';
+			$annonce->categorie_id = '';
+			$annonce->details_id = '';
+			$annonce->created_by = '';
+			$annonce->approved_by = '';
+			
+			return $annonce;
+	}
  }
