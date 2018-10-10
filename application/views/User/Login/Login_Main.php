@@ -4,7 +4,7 @@ $this->load->view('User/Login/Header');
 
 
 <div class="limiter">
-		<div class="container-login100" style="background-image: url('images/-01.jpg');">
+		<div class="container-login100" style="background-image: url('/VAP/public/images/-01.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action='#' method='post'>
 					<span class="login100-form-logo">
