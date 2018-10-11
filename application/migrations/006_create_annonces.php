@@ -8,7 +8,8 @@ class Migration_Create_annonces extends CI_Migration {
 	  $fields = array(
 		"`id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY",
 		"`titre` VARCHAR(50) NOT NULL",
-	    "`description` TEXT NOT NULL",
+			"`description` TEXT NOT NULL",
+			"`prix` FLOAT NOT NULL",
 	    "`ville_id` INT(10) UNSIGNED NOT NULL",
 	    "`details_id` INT(10) UNSIGNED NOT NULL",
 	    "`categorie_id` INT(10) UNSIGNED NOT NULL",
