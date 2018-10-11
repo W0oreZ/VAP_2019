@@ -10,6 +10,7 @@ class Annonce extends frontEnd_Controller
 		$this->load->model('categorie_m');
 		$this->load->model('ville_m');
 		$this->load->model('annonce_m');
+		$this->load->model('annonce_image_m');
 	}
 
     public function Add(){
@@ -31,7 +32,7 @@ class Annonce extends frontEnd_Controller
 
 		$this->load->view('annonce/annonce_add',$data);	
 	}
-
+/*
 	public function upload_Form(){
 		
 
@@ -100,7 +101,7 @@ class Annonce extends frontEnd_Controller
 			$data['error'] = "Upload Error";
 		}
 	}
-	
+	*/
 
 	public function test_upload()
 	{
@@ -142,14 +143,15 @@ class Annonce extends frontEnd_Controller
 			}
 			$annonce_id = $this->annonce_m->save($annonce);
 			if($annonce_id){
-				/*if($this->annonce_image_m->save_images($annonce_id,$data['images'])){
-					redirect('Annonce/view/'.$annonce_id);
+				if($this->annonce_image_m->save_images($annonce_id,$data['images']))
+				{
+					echo "success";
 				}else{
-					$data['error'] = "an error occured";
-				}*/
-				echo var_dump($data['images']);
+					echo "an error occured";
+				}
+				
 			}else{
-				$data['error'] = "an error occured";
+				echo 'couldnt create annonce';
 			}
 		
 		}
