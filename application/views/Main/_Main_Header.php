@@ -20,9 +20,9 @@
 	<link type="text/css" rel="stylesheet" href="<?=base_url('/VAP/public/Main/')?>css/slick-theme.css" />
 
 <!--
-	 nouislider 
+	 nouislider -->
 	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
--->
+
 
 	<!-- Font Awesome Icon -->
 	<link rel="stylesheet" href="<?=base_url('/VAP/public/Main/')?>css/font-awesome.min.css">
