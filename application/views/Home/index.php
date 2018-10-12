@@ -4,7 +4,9 @@
     $this->load->view('Main/_Main_Header',$params);
     ?>
 
-dfgdfgfdgdf
+<h1>
+    Home Page 
+</h1>
 
 
 <?php

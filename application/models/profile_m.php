@@ -26,6 +26,7 @@
 	}
 
 	public function login(){
+		$data = array('test'=>'123');
 		
 		$user = $this->user_m->get_by(array(
 			'username'=>$this->input->post('username'),
@@ -35,20 +36,34 @@
 		if(count((array)$user)>0){
 			//login user
 			$profile = $this->get_by(array('user_id'=>$user->id),TRUE);
+			if(count((array)$profile)>0){
+				$data = array(
+					'username'=> $user->username,
+					'email'=> $user->email,
+					'firstname' => $profile->nom,
+					'lastname' => $profile->prenom,
+					'image' => $profile->image,
+					'id' => $profile->id,
+					'access' => $user->access,
+					'loggedin' => TRUE
+				);
+			}else{
+				$data = array(
+					'username'=> $user->username,
+					'email'=> $user->email,
+					'access' => $user->access,
+					'loggedin' => FALSE
+				);
+				$this->session->set_userdata($data);
+				return false;
+			}
 			
-			$data = array(
-				'username'=> $user->username,
-				'email'=> $user->email,
-				'firstname' => $profile->firstname,
-				'lastname' => $profile->lastname,
-				'image' => $profile->image,
-				'id' => $profile->id,
-				'access' => $user->access,
-				'loggedin' => TRUE
-			);
 			$this->session->set_userdata($data);
 			return true;
 		}
+		$this->session->set_userdata($data);
+
+		return false;
 	}
 
 	public function loggedIn(){
