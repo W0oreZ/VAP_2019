@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>VAP - <?=$title?></title>
+	<title>VAP</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -21,7 +21,7 @@
 
 <!--
 	 nouislider -->
-	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+	<link type="text/css" rel="stylesheet" href="<?=base_url('/VAP/public/Main/')?>css/nouislider.min.css" />
 
 
 	<!-- Font Awesome Icon -->
@@ -38,12 +38,27 @@
 		<![endif]-->
 <!------------------------------------------->
 
+<link rel="stylesheet" href="<?=base_url('/VAP/public/Main/')?>css/uploadstyle.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <!-------------------------------------------->
 </head>
 
 <?php
 	$this->load->view('Main/_top_navigation');
 ?>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">Blank</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
 <div class="section">
 		<!-- container -->
 		<div class="container">

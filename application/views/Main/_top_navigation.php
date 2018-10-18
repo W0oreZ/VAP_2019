@@ -51,7 +51,7 @@
                                         <li><a href="#"><i class="fa fa-heart-o"></i>Favoris</a></li>
                                         <li><a href="#"><i class="fa fa-exchange"></i> Messages</a></li>
                                         <li><a href="#"><i class="fa fa-unlock-alt"></i> Compte</a></li>
-                                        <li><a href="User/Logout"><i class="fa fa-user-plus"></i> Deconnection</a></li>
+                                        <li><a href="./User/Logout"><i class="fa fa-user-plus"></i> Deconnection</a></li>
                                     </ul>
                                     ';
                                 }else{
@@ -62,8 +62,8 @@
                                         <li><a href="User/Login"><i class="fa fa-user-o"></i>Profile</a></li>
                                         <li><a href="#"><i class="fa fa-heart-o"></i>Favoris</a></li>
                                         <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-                                        <li><a href="User/Login"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                                        <li><a href="User/Register"><i class="fa fa-user-plus"></i> Cree Un Compte</a></li>
+                                        <li><a href="./User/Login"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                        <li><a href="./User/Register"><i class="fa fa-user-plus"></i> Cree Un Compte</a></li>
                                     </ul>
                                     ';
                                 }

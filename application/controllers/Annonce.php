@@ -13,95 +13,42 @@ class Annonce extends frontEnd_Controller
 		$this->load->model('annonce_image_m');
 	}
 
+	public function View($id = null){
+		$data = array();
+		if($id == null){
+			$annonces = $this->annonce_m->get_available();
+			if($annonces == false){
+				echo 'error';
+			}else
+			{
+				$result = array();
+				foreach($annonces as $annonce){
+					$result[$annonce->id]['titre'] = $annonce->titre;
+					$result[$annonce->id]['description'] = $annonce->description;
+					$result[$annonce->id]['ville_id'] = $annonce->ville_id;
+					$result[$annonce->id]['ville_name'] = $this->ville_m->get_name($annonce->ville_id);
+					$result[$annonce->id]['categorie_id'] = $annonce->categorie_id;
+					$result[$annonce->id]['categorie_name'] = $this->categorie_m->get_name($annonce->categorie_id);;
+					$result[$annonce->id]['prix'] = $annonce->prix;
+					$result[$annonce->id]['created_by'] = $annonce->created_by;
+					$result[$annonce->id]['primary_image'] = $this->annonce_image_m->get_primary($annonce->id);
+					$result[$annonce->id]['images'] = $this->annonce_image_m->get_images($annonce->id);
+				}
+				$data['annonces'] = $result;
+				$this->load->view('Main/_Main_Header');
+				$this->load->view('annonce/display_all',$data);
+				$this->load->view('Main/_Main_Footer');
+			}
+			
+		}
+	}
+
     public function Add(){
-		$categories=(array)$this->categorie_m->get();
-		$villes=(array)$this->ville_m->get();
-
-		$option = array();
-		for($i = 0 ; $i<count($categories);$i++) {
-			$option[$categories[$i]->id] = $categories[$i]->nom;
-		}
-		$data['categories'] = $option;
-
-		$option = array();
-		foreach ($villes as $vil) {
-			$option[$vil->id] = $vil->nom;
-		}
-		$data['villes'] = $option;
-		$data['error'] = '';
+		$data['categories']=(array)$this->categorie_m->get();
+		$data['villes']=(array)$this->ville_m->get();
 
 		$this->load->view('annonce/annonce_add',$data);	
 	}
-/*
-	public function upload_Form(){
-		
-
-		$data = array();
-		$upload_status = false;
-    	
-    	
-		$cpt = count((array)$_FILES['imagefiles']['name']);
-		$config['upload_path'] = './VAP/public/uploads/';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif';
-		$this->load->library('upload', $config);
-		$this->upload->initialize($config);
-			
-    	for($i=0; $i<$cpt; $i++)
-    	{ 
-			$_FILES['file']['name']       = $_FILES['imagefiles']['name'][$i];
-			$_FILES['file']['type']       = $_FILES['imagefiles']['type'][$i];
-			$_FILES['file']['tmp_name']   = $_FILES['imagefiles']['tmp_name'][$i];
-			$_FILES['file']['error']      = $_FILES['imagefiles']['error'][$i];
-			$_FILES['file']['size']       = $_FILES['imagefiles']['size'][$i];
-			
-
-			// Upload file to server
-			if($this->upload->do_upload('file')){
-				// Uploaded file data
-				$imageData = $this->upload->data();
-				$uploadImgData[$i]['imagefiles'] = $imageData['file_name'];
-
-			}
-
-
-    	    $this->upload->initialize($this->set_upload_options());
-    	    if(!$this->upload->do_upload('file')){
-				echo $this->upload->display_errors();
-				$upload_status = false;
-				
-
-			}else{
-				echo 'success';
-				$upload_status = true;
-				$data['images'] = $this->upload->data();
-			}
-    	    
-		}
-		if($upload_status){
-
-			$annonce = $this->annonce_m->array_from_post(array('titre','description','prix','ville_id','categorie_id'));
-			if(!$this->session->userdata('id')){
-				$annonce['created_by'] = 99;
-			}
-				$annonce['created_by'] = $this->session->userdata('id');
-				$annonce_id = $this->annonce_m->save($annonce);
-				if($annonce_id){
-					if($this->annonce_image_m->save_images($annonce_id,$data['images'])){
-						redirect('Annonce/view/'.$annonce_id);
-					}else{
-						$data['error'] = "an error occured";
-					}
-				}else{
-					$data['error'] = "an error occured";
-				}
-			
-			//$this->load->view('upload_success', $data);
-
-		}else{
-			$data['error'] = "Upload Error";
-		}
-	}
-	*/
 
 	public function test_upload()
 	{

@@ -26,5 +26,27 @@
 		return true;
 
 	} 
+
+	public function get_primary($id){
+		$image = $this->get_by(array('annonce_id'=>$id , 'isPrimary'=> 1),true);
+		if(count((array)$image))
+		return $image->image;
+		else {
+			return 'noimg.png';
+		}
+	}
+
+	public function get_images($id){
+		$result = array();
+		$images = $this->get_by(array('annonce_id'=>$id , 'isPrimary'=> 0),false);
+		if(count((array)$images)<=0){
+			$result[] = 'noimg.png';
+		}
+		foreach($images as $img){
+			$result[] = $img->image;
+		}
+
+		return $result;
+	}
 	
  }

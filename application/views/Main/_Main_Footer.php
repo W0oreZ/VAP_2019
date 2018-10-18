@@ -106,7 +106,13 @@
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/slick.min.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/nouislider.min.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/jquery.zoom.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/main.js"></script>
+	<script src="<?=base_url('/VAP/Public/Main/')?>js/upluadfile.js"></script>
+	<script src="<?=base_url('/VAP/Public/Main/')?>js/image-compressor.min.js">
+	<script src="<?=base_url('/VAP/Public/Main/')?>js/ajax.js?ver=51">
+	
+
 
 </body>
 </html>

@@ -11,5 +11,9 @@
 	{
 		parent::__construct();
 	}
+
+	function get_name($id){
+		return $this->get_by(array('id'=>$id),true)->nom;
+	}
 	
  }
