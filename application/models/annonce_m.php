@@ -21,6 +21,15 @@
 			return false;
 		}
 	}
+
+	function get_details($id){
+		$annonce = $this->get_by(array('id'=>$id),true);
+		if(count((array)$annonce)>0){
+			return $annonce;
+		}else{
+			return false;
+		}
+	}
 	
 	function get_new(){
 			$annonce = new stdClass();

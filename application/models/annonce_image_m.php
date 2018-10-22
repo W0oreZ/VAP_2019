@@ -40,10 +40,10 @@
 		$result = array();
 		$images = $this->get_by(array('annonce_id'=>$id , 'isPrimary'=> 0),false);
 		if(count((array)$images)<=0){
-			$result[] = 'noimg.png';
+			$result['name'] = 'noimg.png';
 		}
 		foreach($images as $img){
-			$result[] = $img->image;
+			$result['name'] = $img->image;
 		}
 
 		return $result;

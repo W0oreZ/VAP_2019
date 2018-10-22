@@ -15,14 +15,16 @@ class Annonce extends frontEnd_Controller
 
 	public function View($id = null){
 		$data = array();
-		if($id == null){
+		$result = array();
+		if(!$id){
 			$annonces = $this->annonce_m->get_available();
 			if($annonces == false){
 				echo 'error';
 			}else
 			{
-				$result = array();
+				
 				foreach($annonces as $annonce){
+					$result[$annonce->id]['id'] = $annonce->id;
 					$result[$annonce->id]['titre'] = $annonce->titre;
 					$result[$annonce->id]['description'] = $annonce->description;
 					$result[$annonce->id]['ville_id'] = $annonce->ville_id;
@@ -40,6 +42,34 @@ class Annonce extends frontEnd_Controller
 				$this->load->view('Main/_Main_Footer');
 			}
 			
+		}else{
+
+			$annonce = $this->annonce_m->get_details($id);
+			if($annonce == false){
+				echo 'error';
+			}else
+			{
+				if($annonce->approved_by > 0)
+				{
+				$data['id'] = $annonce->id;
+				$data['titre'] = $annonce->titre;
+				$data['description'] = $annonce->description;
+				$data['ville_id'] = $annonce->ville_id;
+				$data['ville_name'] = $this->ville_m->get_name($annonce->ville_id);
+				$data['categorie_id'] = $annonce->categorie_id;
+				$data['categorie_name'] = $this->categorie_m->get_name($annonce->categorie_id);;
+				$data['prix'] = $annonce->prix;
+				$data['created_by'] = $annonce->created_by;
+				$data['created_by_name'] = $this->profile_m->get_name($annonce->created_by);
+				$data['primary_image'] = $this->annonce_image_m->get_primary($annonce->id);
+				$data['images'] = $this->annonce_image_m->get_images($annonce->id);
+				}else{
+					redirect('annonce/view');
+				}
+			}
+			$this->load->view('Main/_Main_Header');
+			$this->load->view('annonce/display',$data);
+			$this->load->view('Main/_Main_Footer');
 		}
 	}
 

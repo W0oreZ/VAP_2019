@@ -74,6 +74,15 @@
 		$this->session->sess_destroy();
 	}
 
+	public function get_name($id){
+        $profile = $this->profile_m->get($id,true);
+        if($profile){
+            return $profile->nom . ' ' . $profile->prenom;
+        }else{
+            return false;
+        }
+    }
+
 	public function hash($string){
 		//return hash('sha512',$string . config_item('encryption_key'));
 		return $string;
