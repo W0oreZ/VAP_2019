@@ -1,5 +1,5 @@
+<?php $this->load->view('Main/_Main_Header'); ?>
 <!-- section -->
-<?php echo var_dump($images) ?>
 <div class="section">
 		<!-- container -->
 		<div class="container">
@@ -190,3 +190,5 @@
             </div>
         </div>
 </div>
+
+<?php $this->load->view('Main/_Main_Footer'); ?>

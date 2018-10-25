@@ -18,6 +18,7 @@
 				'rules'=>'Trim|required'
 			)
 		);
+
 	
 	function __construct()
 	{
@@ -26,7 +27,6 @@
 	}
 
 	public function login(){
-		$data = array('test'=>'123');
 		
 		$user = $this->user_m->get_by(array(
 			'username'=>$this->input->post('username'),
@@ -81,6 +81,27 @@
         }else{
             return false;
         }
+	}
+	
+	public function update_profile($profileid=null,$userid=null){
+		if($profileid){
+
+			$data = $this->array_from_post(['nom','prenom','telephone','account_type']);
+			return $this->save($data,$profileid);
+
+		}elseif ($userid) {
+
+			$profile = $this->get_by(array('user_id'=>$userid),true);
+			if($profile){
+				$data = $this->array_from_post(['nom','prenom','telephone','account_type']);
+				return $this->save($data,$profile->id);
+			}else{
+				return false;
+			}
+
+		}else{
+			return false;
+		} 
     }
 
 	public function hash($string){

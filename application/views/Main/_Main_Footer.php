@@ -14,8 +14,9 @@
 						<!-- footer logo -->
 						<div class="footer-logo">
 							<a class="logo" href="#">
-		            <img src="./img/logo.png" alt="">
-		          </a>
+<!--							<img src="./img/logo.png" alt="">-->
+                            <h1 class="ap"><span id="v">V</span>AP</h1>
+						</a>
 						</div>
 						<!-- /footer logo -->
 
@@ -106,9 +107,8 @@
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/slick.min.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/nouislider.min.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/jquery.zoom.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/main.js"></script>
-	<script src="<?=base_url('/VAP/Public/Main/')?>js/upluadfile.js"></script>
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/image-compressor.min.js">
 	<script src="<?=base_url('/VAP/Public/Main/')?>js/ajax.js?ver=51">
 	

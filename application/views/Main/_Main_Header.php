@@ -37,10 +37,6 @@
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 <!------------------------------------------->
-
-<link rel="stylesheet" href="<?=base_url('/VAP/public/Main/')?>css/uploadstyle.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 <!-------------------------------------------->
 </head>
 
@@ -48,7 +44,7 @@
 	$this->load->view('Main/_top_navigation');
 ?>
 
-<!-- BREADCRUMB -->
+<!-- BREADCRUMB 
 <div id="breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb">
@@ -57,7 +53,7 @@
 			</ul>
 		</div>
 	</div>
-	<!-- /BREADCRUMB -->
+	 /BREADCRUMB -->
 
 <div class="section">
 		<!-- container -->

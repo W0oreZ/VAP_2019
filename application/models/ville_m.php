@@ -15,5 +15,9 @@
 	function get_name($id){
 		return $this->get_by(array('id'=>$id),true)->nom;
 	}
+
+	function get_id($name){
+		return $this->get_by(array('nom'=>$name),true)->id;
+	}
 	
  }

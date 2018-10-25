@@ -1,5 +1,5 @@
 /*
-Template Name: E-SHOP HTML Edsqdqsdsqd-Commerce Template
+Template Name: E-SHOP HTML E-Commerce Template
 Author: yaminncco
 
 Colors:
@@ -1566,7 +1566,7 @@ width: 850px
 /*-- shopping cart table --*/
 
 .shopping-cart-table>tbody>tr>td, .shopping-cart-table>tbody>tr>th, .shopping-cart-table>tfoot>tr>td, .shopping-cart-table>tfoot>tr>th, .shopping-cart-table>thead>tr>td, .shopping-cart-table>thead>tr>th {
-  padding: 15px 0px;
+  padding: 15px 15px;
   vertical-align: middle;
   border-top: 1px solid #DADADA;
 }
@@ -1602,11 +1602,12 @@ width: 850px
 }
 
 .shopping-cart-table>tbody>tr>.qty .input {
-  width: 90px;
+  margin-left: 5%
 }
 
 .shopping-cart-table>tbody>tr>.price {
   font-size: 18px;
+ 
 }
 
 .shopping-cart-table>tbody>tr>.total {

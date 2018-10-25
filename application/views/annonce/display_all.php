@@ -1,4 +1,4 @@
-
+<?php $this->load->view('Main/_Main_Header'); ?>
 
 <!-- STORE -->
 					<div id="store">
@@ -76,3 +76,4 @@
 						</div>
 					</div>
 					<!-- /store bottom filter -->
+<?php $this->load->view('Main/_Main_Footer'); ?>

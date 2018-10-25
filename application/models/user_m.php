@@ -90,6 +90,11 @@ class User_M extends MY_Model
 		
 		return $user;
 	}
+
+	public function register(){
+		$data = $this->array_from_post(['email','username','password']);
+		return $this->save($data);
+	}
 	
 	public function hash($string){
 		//return hash('sha512',$string . config_item('encryption_key'));

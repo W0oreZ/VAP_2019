@@ -12,6 +12,38 @@
 		parent::__construct();
 	}
 
+	function get_filtered($titre,$categorie_id,$ville_id){
+		$annonces = array();
+		$filter = '';
+
+		if($titre != '' or $titre != null){
+			$filter .= 'titre like "%'.$titre.'%"';
+			$filter .= ' and ';
+		}
+
+		if($categorie_id != '' or $categorie_id != null){
+			if($categorie_id != 1)
+			{
+				$filter .='categorie_id = '.$categorie_id;
+				$filter .=' and ';
+			}
+			
+		}
+
+		if($ville_id != '' or $ville_id != null){
+			if($ville_id != 1)
+			{
+				$filter .='ville_id = '.$ville_id;
+				$filter .=' and ';
+			}
+		}
+
+		$filter .= 'approved_by <> 0';
+
+		$annonces = $this->get_by($filter,false);
+		return $annonces;
+	}
+
 	function get_available(){
 		$this->_order_by = 'created_at';
 		$annonces = $this->get_by('approved_by <> 0');

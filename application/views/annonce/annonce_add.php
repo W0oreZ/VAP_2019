@@ -1,13 +1,13 @@
 <?php $this->load->view('Main/_Main_Header'); ?>
 
 
-<form class="form-horizontal">
+<form class="form-horizontal" action="test_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
 <fieldset class="ff">
 <!-- Form Name -->
 <div class="aside">
 <div class="aside-title"><h1>Information Sur Votre Annonce</span></h1>
 </div></div>
-<form class="firstform">
+
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="titreinput">Titre</label>  
@@ -47,17 +47,17 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="selectville">Ville:</label>
+  <label class="col-md-4 control-label" for="ville_id">Ville:</label>
   <div class="col-md-6">
-    <select id="selectville" name="selectville" class="form-control">
+    <select id="ville_id" name="ville_id" class="form-control">
      
        <option value="0" disabled="" selected="">---Choisissez une ville---</option>
        <?php
-        foreach($categories as $cat){
+        foreach($villes as $ville){
             echo '<option value="';
-            echo $cat->id;
+            echo $ville->id;
             echo '">';
-            echo $cat->nom;
+            echo $ville->nom;
             echo '</option>';
         }
       ?>
@@ -91,42 +91,48 @@
   </div>
 </div>
 
+<div class="row">
 <!-- File Button --> 
-<div class="upfile">
-<div class="form-group">
- 	   <div class="col-md-6">
-      <form action="Annonce/do_upload" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-     
-        
-<!--              -->
-<div class="container" id="upimg">
-    <fieldset class="form-group">
-        <div class="imaglink" ><a href="javascript:void(0)" onclick="$('#pro-image').click()" >
-    <img src="<?=base_url('/public/main/')?>img/upload%20image.png" alt="" width="60px" height="50px"></a>
-       <div class="divUI">
-       <a href="javascript:void(0)" onclick="$('#pro-image').click()" id="UploadImg">Upload Image</a></div></div>
-        <input type="file" id="pro-image" name="imagefile[]" style="display: none;" class="form-control" multiple placeholder="
-Savez vous que les annonces avec photos sont 10 fois plus consultés que celles qui n'en ont pas !">
-    </fieldset>
-    <div class="preview-images-zone">
-    </div>
+<div class="col-md-12 mb-40">
+	<h6 class="mt-20">AJOUTEZ JUSQU'À 6 PHOTOS (<span id="coaj"> 6</span> IMAGES RESTANTES)</h6>
+	<span class="photos" id="uploaded_images">
+		<?php  
+		$r=explode(',', set_value('imgcount'));
+		if (!empty($r[0])) :
+			for ($i=0; $i < (count($r)); $i++):
+				$ran=explode('.', $r[$i]);
+			echo '<div class="photo"><a class="remove" href="'.$r[$i].'" onclick="return false;"><i class="fa fa-trash"></i></a><div class="photo-inner"><div class="photo-image"><img src="'.base_url('/VAP/Public/uploads/').$r[$i].'"></div><div class="photo-foot">
+			<div class="checkbox"><label class="form-label ml-1"><input type="radio" name="images" value="'.$r[$i].'" id="'.$ran[0].'" '.set_radio('images', $r[$i]).'><span class="label-text">Photo principale</span></label></div>
+			</div></div></div>';
+			endfor;
+		endif;
+		 ?>
+	</span>
+	<span id="loader"></span>
+	<div class="photo fileinput fileinput-new" id="uploader">
+		<span class="btn-upload">
+		<i class="fa fa-camera"></i>
+		<i class="fa fa-plus-circle"></i>
+		<input type="file" name="files"  id="files" accept="image/jpeg,image/gif,image/png,image/bmp" multiple>
+		<div id="remaining-images" class="blue-badge">Ajouter</div>
+		</span>
+	</div>
+	<input type="hidden" name="imgcount" value="<?php echo set_value('imgcount'); ?>" id="imgcount" style="width: 0px">
+	<div class="row">
+		<div class="col-2 p-0">
+			<i class="fa fa-camera fa-3x mr-2"></i>
+		</div>
+		<div class="col-10 p-0">
+			<p class="mt-20 "> Savez vous que les annonces avec photos sont 10 fois plus consultés que celles qui n'en ont pas !</p>
+		</div>
+	</div>
+</div>
 </div>
 
-            
-            
-          </form>
-	      
-	      
-	  </div>
-</div>
-</div>
-</form>
 <?php if($this->session->userdata('loggedin') == false): ?>
 
-<form class="form-horizontal">
+
 <fieldset>
-
-
 <!-- Form Name -->
 <div class="aside">
 <div class="aside-title"><h1>2<span class="ordinal">éme</span></h1>
@@ -134,14 +140,14 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
 
 <!-- Multiple Radios (inline) -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="usertype"></label>
+  <label class="col-md-4 control-label" for="account_type"></label>
   <div class="col-md-4"> 
-    <label class="radio-inline" for="usertype-0">
-      <input type="radio" name="usertype" id="usertype-0" value="1" checked="fals">
+    <label class="radio-inline" for="account_type-0">
+      <input type="radio" name="account_type" id="account_type-0" value="Particulier" checked="true">
       Particulier
     </label> 
-    <label class="radio-inline" for="usertype-1">
-      <input type="radio" name="usertype" id="usertype-1" value="2">
+    <label class="radio-inline" for="account_type-1">
+      <input type="radio" name="account_type" id="account_type-1" value="Professionel" checked="false">
       Professionel
     </label>
   </div>
@@ -151,8 +157,16 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
 <div class="form-group">
   <label class="col-md-4 control-label" for="np">Nom:</label>  
   <div class="col-md-6">
-  <input id="np" name="np" type="text" placeholder="Nom et Prenom" class="form-control input-md" required="true">
-  <span class="help-block">ex:Sara mark</span>  
+  <input id="np" name="nom" type="text" placeholder="Nom et Prenom" class="form-control input-md" required="true">
+  <span class="help-block">ex:Benjeloune</span>  
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="np">Prenom:</label>  
+  <div class="col-md-6">
+  <input id="np" name="prenom" type="text" placeholder="Nom et Prenom" class="form-control input-md" required="true">
+  <span class="help-block">ex:Ahmed</span>  
   </div>
 </div>
 
@@ -160,7 +174,7 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
 <div class="form-group">
   <label class="col-md-4 control-label" for="tele">Téléphone:</label>  
   <div class="col-md-6">
-  <input id="tele" name="tele" type="text" placeholder="06 xx xx xx xx" class="form-control input-md" required="true">
+  <input id="tele" name="telephone" type="text" placeholder="06 xx xx xx xx" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -174,11 +188,19 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
   </div>
 </div>
 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="username">Username</label>  
+  <div class="col-md-6">
+  <input id="username" name="username" type="text" placeholder="ZeroW21547" class="form-control input-md" required="true">
+    
+  </div>
+</div>
+
 <!-- Password input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
   <div class="col-md-4">
-    <input id="passwordinput" name="passwordinput" type="password" placeholder="Mot de passe " class="form-control input-md" required="true">
+    <input id="passwordinput" name="password" type="password" placeholder="Mot de passe " class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -187,7 +209,7 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
 <div class="form-group">
   <label class="col-md-4 control-label" for="passwordinput">Confermer Mot de passe:</label>
   <div class="col-md-4">
-    <input id="passwordinput" name="passwordinput" type="password" placeholder="Mot de passe" class="form-control input-md" required="true">
+    <input id="passwordinput" name="confirmpassword" type="password" placeholder="Mot de passe" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -203,17 +225,18 @@ Savez vous que les annonces avec photos sont 10 fois plus consultés que celles 
 </div>
 
 </fieldset>
-</form>
+
     
 </fieldset>
-</form>
+
 <!-- Button (Double) -->
 <div class="form-group" id="btn_val">
 
   <div class="col-md-8">
-    <button id="val" name="button1id" class="btn btn-success"><img src="img/UI_3_-20-512.png" alt="" width="10px" height="10px">Valider</button>
+    <input type='submit' id="val" name="button1id" class="btn btn-success"><img src="img/UI_3_-20-512.png" alt="" width="10px" height="10px">Valider</button>
     <button id="eff" name="button2id" class="btn btn-danger"><img src="img/wrong-2-512.png" alt="" width="10px" height="10px">Effacer</button>
   </div>
 </div>
+      </form>
 
 <?php $this->load->view('Main/_Main_Footer'); ?>
