@@ -1,21 +1,22 @@
 <?php
-class Profile extends frontEnd_Controller 
+class Profile extends frontend_Controller 
 {
     function __construct(){
         parent::__construct();
-        $this->load->model('profile_m');
+
     }
 
     public function index($id){
         $profile = $this->profile_m->get($id);
 
-        if(count($profile)>0){
-            echo var_dump($profile);
-        }else{
+        if(count($profile)<=0){
             redirect('User/Login');
         }
+        if($id != $this->session->userdata('id')){
+            redirect(base_url().'Profile/index/'.$this->session->userdata('id'));
+        }
 
-        
+
     }
 
     

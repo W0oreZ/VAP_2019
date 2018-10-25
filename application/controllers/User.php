@@ -1,12 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends frontEnd_Controller {
+class User extends frontend_Controller {
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('profile_m');
 	}
 
 
