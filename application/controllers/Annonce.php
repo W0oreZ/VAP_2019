@@ -10,6 +10,8 @@ class Annonce extends frontend_Controller
 
 	public function View($id = null,$title=null,$categorie=null,$ville=null,$pMin=null,$pMax=null){
 		$data = array();
+		$data['categories']=(array)$this->categorie_m->get();
+		$data['villes']=(array)$this->ville_m->get();
 		$result = array();
 
 		if($id != null)
@@ -39,9 +41,7 @@ class Annonce extends frontend_Controller
 						redirect('annonce/view');
 				}
 			}
-			$data['categories']=(array)$this->categorie_m->get();
-			$data['villes']=(array)$this->ville_m->get();
-			
+
 			$this->load->view('annonce/display',$data);
 			return;
 		}
@@ -73,10 +73,6 @@ class Annonce extends frontend_Controller
 				$result[$annonce->id]['images'] = $this->annonce_image_m->get_images($annonce->id);
 			}
 			$data['annonces'] = $result;
-			$data['categories']=(array)$this->categorie_m->get();
-			$data['villes']=(array)$this->ville_m->get();
-			$this->load->view('annonce/display_all',$data);
-			return;
 		}
 		else
 		{
@@ -101,15 +97,13 @@ class Annonce extends frontend_Controller
 				$result[$annonce->id]['images'] = $this->annonce_image_m->get_images($annonce->id);
 			}
 			$data['annonces'] = $result;
-			$data['categories']=(array)$this->categorie_m->get();
-			$data['villes']=(array)$this->ville_m->get();
-			$this->load->view('annonce/display_all',$data);
+			
 			return;
 		}
 
 		}
 		//-------------------------------------
-		
+		$this->load->view('annonce/display_all',$data);
 		
 		//------------------------------------------------------------------------------
 		
