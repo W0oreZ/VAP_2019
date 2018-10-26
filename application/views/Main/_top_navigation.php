@@ -51,9 +51,7 @@
                                 <!--   login php  -->
                                 <?php if($this->session->userdata('loggedin') == true){
                                     echo '<strong class="text-uppercase">';
-                                    echo $this->session->userdata('firstname');
-                                    echo ' ';
-                                    echo $this->session->userdata('lastname');
+                                    echo '  '.$this->session->userdata('username').'  ';
                                     echo ' <i class="fa fa-caret-down"></i></strong></div>';
                                     echo '<a href="'.base_url().'Profile/index/';
                                     echo $this->session->userdata('id');

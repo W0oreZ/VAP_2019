@@ -27,7 +27,7 @@
 							
 							   <!-- Select Basic -->
                                        <select id="selectbasic" name="categorie" class="form-control">
-									   <?php foreach($categories as $c):?>
+									<?php foreach($categories as $c):?>
                                       <option value="<?php echo $c->nom?>"><?php echo $c->nom?></option>
 									<?php endforeach;?>
                                     </select>
