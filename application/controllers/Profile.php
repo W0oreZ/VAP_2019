@@ -17,7 +17,7 @@ class Profile extends frontend_Controller
         }
 
 
-        echo var_dump($profile);
+        $this->load->view('User/Profile/main');
 
 
     }
