@@ -17,6 +17,9 @@ class Profile extends frontend_Controller
         }
 
 
+        echo var_dump($profile);
+
+
     }
 
     

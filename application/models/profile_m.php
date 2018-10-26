@@ -19,6 +19,42 @@
 			)
 		);
 
+	public $register_rules=array(
+		'username'=>array(
+			'field'=>'username',
+			'label'=>'Username',
+			'rules'=>'Trim|required',
+			'errors' => array(
+					'required' => 'You must provide a %s.',
+			)
+		),
+		'email'=>array(
+			'field'=>'email',
+			'label'=>'Email',
+			'rules'=>'Trim|required',
+			'errors' => array(
+					'required' => 'You must Enter an %s.',
+			)
+		),
+		'password'=>array(
+			'field'=>'password',
+			'label'=>'Password',
+			'rules'=>'Trim|required',
+			'errors' => array(
+				'required' => 'You must provide a %s.',
+			)
+		),
+		'confirmpassword'=>array(
+			'field'=>'confirmpassword',
+			'label'=>'Confirm Password',
+			'rules'=>'Trim|required|matches[password]',
+			'errors' => array(
+				'required' => 'You must provide a %s.',
+				'matches' => 'passwords dont match'
+			)
+		)
+		);
+
 	
 	function __construct()
 	{
@@ -26,6 +62,20 @@
 		$this->load->model('user_m');
 	}
 
+	public function register(){
+		$user_id = $this->user_m->register();
+		if($user_id==null) return false;
+
+		$data = $this->array_from_post(['nom','prenom']);
+		$data['user_id']=$user_id;
+		$data['account_type']='Particulier';
+		$data['is_activated']=0;
+		$data['is_online']=0;
+		$data['rating']=0;
+		$data['image']='noimg.png';
+		$this->save($data);
+		return true;
+	}
 	public function login(){
 		
 		$user = $this->user_m->get_by(array(
@@ -47,22 +97,12 @@
 					'access' => $user->access,
 					'loggedin' => TRUE
 				);
-			}else{
-				$data = array(
-					'username'=> $user->username,
-					'email'=> $user->email,
-					'access' => $user->access,
-					'loggedin' => FALSE
-				);
 				$this->session->set_userdata($data);
+				return true;
+			}else{
 				return false;
 			}
-			
-			$this->session->set_userdata($data);
-			return true;
 		}
-		$this->session->set_userdata($data);
-
 		return false;
 	}
 
@@ -107,5 +147,23 @@
 	public function hash($string){
 		//return hash('sha512',$string . config_item('encryption_key'));
 		return $string;
+	}
+
+	public function get_new(){
+		$profile = new stdclass();
+		$profile->id=null;
+		$profile->nom='';
+		$profile->prenom='';
+		$profile->telephone='';
+		$profile->adresse='';
+		$profile->date_naissance='';
+		$profile->image='';
+		$profile->rating=0;
+		$profile->account_type='Particulier';
+		$profile->is_activated=0;
+		$profile->is_online=0;
+		$profile->user_id=0;
+
+		return $profile;
 	}
  }

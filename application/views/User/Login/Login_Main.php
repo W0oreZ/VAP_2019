@@ -1,49 +1,39 @@
 <?php
-$this->load->view('User/Login/Header');
+$this->load->view('User/auth_Header');
 ?>
+<div class="container register">
+	<div class="row">
+		<div class="col-md-3 register-left">
+			<img src="<?=base_url('VAP/public/main/img/')?>logoVAP.png" alt=""/>
+			<h3>Welcome Back</h3>
+			<p>You are 30 seconds away from earning your own money!</p>
+			<a href="<?=base_url()?>User/Register"><input type="submit" name="" value="Register"></a><br/>
+		</div>
+		<div class="col-md-9 register-right">
+			<div>
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Login</h3>
+                    <form action='<?=base_url()?>User/Login' method='POST'>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <?php echo form_error('username'); ?>
+                                    <input type="text" class="form-control" placeholder="Enter Your Username *" value="<?php echo set_value('username'); ?>" name ="username"/>
+                                </div>
+                                <div class="form-group">
+                                    <?php echo form_error('password'); ?>
+                                    <input type="password" class="form-control" placeholder="Password *" value="<?php echo set_value('password'); ?>" name="password"/>
+                                </div>
+								<input type="submit" class="btnRegister"  value="Login" style="margin:0 auto"/>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
 
-
-<div class="limiter">
-		<div class="container-login100" style="background-image: url('/VAP/public/login/images/-01.jpg');">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form" action='#' method='post'>
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
- 
-						</label>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<input type='submit' class="login100-form-btn">
-							Login
-						</button>
-					</div>
-
-				        </a>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
-
-
+</div>
 <?php
-$this->load->view('User/Login/Footer');
+$this->load->view('User/auth_Footer');

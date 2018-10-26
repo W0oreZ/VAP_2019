@@ -35,7 +35,25 @@ class User extends frontend_Controller {
 	}
 
     public function Register(){
+		$home = 'Home';
+		($this->profile_m->loggedIn() == FALSE) || redirect($home);
 
+		$rules = $this->profile_m->register_rules;
+		$this->form_validation->set_rules($rules);
+
+		if($this->form_validation->run()){
+			//redirecting user login successfull;
+			if($this->profile_m->register() == TRUE){
+				if($this->profile_m->login()==true){
+					redirect($home);
+				} 
+			}else{
+				echo '<div class="alert alert-warning">Please try again there was an error</div>';
+				redirect('User/Register','refresh');
+			}
+		}else{
+			$this->load->view('User/Register/Register_Main');
+		}
     }
 
 }

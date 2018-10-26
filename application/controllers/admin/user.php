@@ -62,6 +62,7 @@ class user extends admin_Controller
 		if($this->form_validation->run()){
 			//redirecting user login successfull;
 			if($this->user_m->login() == TRUE){
+				sleep(2);
 				redirect($dashboard);
 			}else{
 				$this->form_validation->set_message('error','<div class="alert alert-warning">email : %s already exists</div>');
